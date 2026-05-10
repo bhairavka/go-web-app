@@ -1,17 +1,23 @@
+name: CI/CD
+
+# Exclude the workflow to run on changes to the helm chart
 on:
   push:
     branches:
       - main
     paths-ignore:
+      - 'helm/**'
+      - 'k8s/**'
       - 'README.md'
-      - '.helm/**'
-    jobs:
-      code quality:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-          - name: Run golangci-lint
-            uses: golangci/golangci-lint-action@v6
-            with:
-              go-version: 'v1.56.2'
+jobs:
+   code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: v1.56.2
