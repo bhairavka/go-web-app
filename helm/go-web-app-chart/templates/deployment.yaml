@@ -10,7 +10,7 @@ spec:
   template:
    metadata:
       labels:
-      app: go-web-app
+       app: go-web-app
    spec:
       containers:
       - name: go-web-app
